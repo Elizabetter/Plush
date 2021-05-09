@@ -4,10 +4,14 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 import SignInForm from '../SigninForm';
 import { SIGN_IN } from '../../constants/endpoints';
 import { useAuthDataContext } from '../../auth/AuthDataProvider';
 import { createOne } from '../../dataProvider/API';
+import CustomizedSnackbars from '../../components/Alert';
+import messages from './messages';
+import { alertType } from '../../constants/api';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -29,6 +33,7 @@ export function SignIn() {
   const history = useHistory();
   const { onLogin } = useAuthDataContext();
 
+  const [showErrorAlert, setShowErrorAlert] = React.useState(false);
   const onEditUserFormSubmit = ({ ...data }) => {
     // const params = data;
     // const payload = {
@@ -41,23 +46,37 @@ export function SignIn() {
     // };
     // dispatch(createEntityAction(payload));
     createOne(SIGN_IN, data)
-      .then(r =>
-        // console.log(r),
+      .then(r => {
         onLogin({
           id: r.body.split(' ')[0],
           token: r.body.split(' ')[2],
-        }),
-      )
-      .then(history.push(`/ads`));
+        });
+        setTimeout(function() {
+          history.push(`/ads`);
+        }, 500);
+      })
+      // eslint-disable-next-line no-unused-vars
+      .catch(r => {
+        setShowErrorAlert(true);
+        setTimeout(function() {
+          setShowErrorAlert(false);
+        }, 5000);
+      });
   };
 
   return (
     <div className={classes.paper}>
+      {showErrorAlert && (
+        <CustomizedSnackbars
+          message={<FormattedMessage {...messages.errorAlert} />}
+          status={alertType.ERROR}
+        />
+      )}
       <Avatar className={classes.avatar}>
         <LockOutlinedIcon />
       </Avatar>
       <Typography component="h1" variant="h5">
-        Вход
+        <FormattedMessage {...messages.title} />
       </Typography>
       <div className={classes.form}>
         <SignInForm onSubmit={onEditUserFormSubmit} />

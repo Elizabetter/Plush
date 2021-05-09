@@ -28,4 +28,8 @@ export default defineMessages({
     id: `${scope}.logout`,
     defaultMessage: 'Выйти',
   },
+  profile: {
+    id: `${scope}.profile`,
+    defaultMessage: 'Мой профиль',
+  },
 });

@@ -57,7 +57,7 @@ const SignInForm = ({ onSubmit }) => {
           </Grid>
           <Grid container>
             <FormActions>
-              <SaveButton />
+              <SaveButton>Войти</SaveButton>
             </FormActions>
           </Grid>
         </Grid>

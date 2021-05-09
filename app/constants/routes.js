@@ -7,4 +7,5 @@ export const routes = {
   CREATE_AD: '/create_ad',
   MY_ADS: '/my_ads',
   EMPTY_PAGE: '/empty',
+  PROFILE: '/profile',
 };

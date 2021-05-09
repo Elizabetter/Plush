@@ -11,6 +11,7 @@ const FormActions = styled.div`
 
 export const FormActionsDisplay = styled.div`
   margin-left: 6px;
+  margin-top: 8px;
   width: 100%;
   display: flex;
   height: 31px;

@@ -10,6 +10,7 @@ import Avatar from '@material-ui/core/Avatar';
 import { useHistory } from 'react-router-dom';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import { Typography } from '@material-ui/core';
 import { routes } from '../../constants/routes';
 import { useAuthDataContext } from '../../auth/AuthDataProvider';
 
@@ -62,6 +63,7 @@ const Header = ({ handleToggle }) => {
   // eslint-disable-next-line no-unused-expressions
 
   if (activeUser) {
+    // eslint-disable-next-line no-shadow
     const { firstName, lastName } = activeUser;
     fullName = [firstName, lastName].join(' ');
   }
@@ -76,6 +78,14 @@ const Header = ({ handleToggle }) => {
   const handleLogout = () => {
     onLogout();
     history.push(routes.SIGN_IN);
+  };
+
+  const handleLogin = () => {
+    history.push(routes.SIGN_IN);
+  };
+
+  const handleProfile = () => {
+    history.push(routes.PROFILE);
   };
 
   return (
@@ -94,11 +104,11 @@ const Header = ({ handleToggle }) => {
             </IconButton>
           </Hidden>
           <div className={classes.title}>
-            {/* <Link to={routes.HOME_PAGE}> */}
-            {/*  <img src={logotype} alt={logotype} className={classes.image} /> */}
-            {/* </Link> */}
+            <Typography variant="h4" component="h1" gutterBottom>
+              Плюшкин
+            </Typography>
           </div>
-          {activeUser && (
+          {activeUser ? (
             <div>
               {fullName}
               <IconButton
@@ -128,7 +138,37 @@ const Header = ({ handleToggle }) => {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                <MenuItem onClick={handleProfile}>Мой профиль</MenuItem>
+                <MenuItem onClick={handleLogout}>Выйти</MenuItem>
+              </Menu>
+            </div>
+          ) : (
+            <div>
+              <IconButton
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <Avatar />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={open}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleLogin}>Войти</MenuItem>
               </Menu>
             </div>
           )}

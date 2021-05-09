@@ -10,10 +10,10 @@ export const scope = 'app.containers.SignIn';
 export default defineMessages({
   title: {
     id: `${scope}.title`,
-    defaultMessage: 'Вход!',
+    defaultMessage: 'Вход',
   },
-  label: {
-    id: `${scope}.label`,
-    defaultMessage: 'Для авторизации используйте Google аккаунт.',
+  errorAlert: {
+    id: `${scope}.errorAlert`,
+    defaultMessage: 'Не удалось войти. Попробуйте еще раз.',
   },
 });

@@ -1,12 +1,12 @@
 import { call, takeEvery } from 'redux-saga/effects';
 import { getListSaga } from '../App/saga';
-import { CONTRACTS } from '../../constants/endpoints';
+import { USERS_ADS } from '../../constants/endpoints';
 import { getContractsAction } from './actions';
 
 export function* getContractsSaga({ payload }) {
   const { id } = payload;
   const listPayload = {
-    endpoint: CONTRACTS(id),
+    endpoint: USERS_ADS(id),
     sagaRoutine: getContractsAction,
   };
   yield call(getListSaga, { payload: listPayload });

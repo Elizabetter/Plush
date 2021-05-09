@@ -62,7 +62,6 @@ export function* deleteOneSaga({ payload }) {
 }
 
 export function* getListSaga({ payload }) {
-  console.log(payload);
   const { endpoint, sagaRoutine, params } = payload;
   if (endpoint === null || sagaRoutine === null) {
     throw new Error('Specify endpoint and sagaRoutine');

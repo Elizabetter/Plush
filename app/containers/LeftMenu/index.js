@@ -3,14 +3,13 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { FormattedMessage } from 'react-intl';
 import Divider from '@material-ui/core/Divider';
-import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Hidden from '@material-ui/core/Hidden';
 import Drawer from '@material-ui/core/Drawer';
 import PropTypes from 'prop-types';
 import Toolbar from '@material-ui/core/Toolbar';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import messages from './messages';
 import { routes } from '../../constants/routes';
 import { useAuthDataContext } from '../../auth/AuthDataProvider';
@@ -41,12 +40,8 @@ const LeftMenu = ({ window, handleDrawerToggle, mobileOpen }) => {
   const theme = useTheme();
   const location = useLocation();
   const { pathname } = location;
-  const { onLogout } = useAuthDataContext();
-  const history = useHistory();
-  const handleLogout = () => {
-    onLogout();
-    history.push(routes.SIGN_IN);
-  };
+  // eslint-disable-next-line no-unused-vars
+  const { user } = useAuthDataContext();
 
   const isSelected = path => pathname === path;
 
@@ -65,12 +60,13 @@ const LeftMenu = ({ window, handleDrawerToggle, mobileOpen }) => {
           />
         </ListItem>
       </Link>
-
-      {/* <Link to={routes.MY_ADS} className={classes.link}> */}
-      {/*  <ListItem button selected={isSelected(routes.MY_ADS)}> */}
-      {/*    <ListItemText primary={<FormattedMessage {...messages.usersAds} />} /> */}
-      {/*  </ListItem> */}
-      {/* </Link> */}
+      {/* {user && ( */}
+      <Link to={routes.MY_ADS} className={classes.link}>
+        <ListItem button selected={isSelected(routes.MY_ADS)}>
+          <ListItemText primary={<FormattedMessage {...messages.usersAds} />} />
+        </ListItem>
+      </Link>
+      {/* )} */}
     </>
   );
 
@@ -83,15 +79,15 @@ const LeftMenu = ({ window, handleDrawerToggle, mobileOpen }) => {
       </Toolbar>
       <Divider />
       {defaultLinks}
-      <Divider />
-      <List>
-        <ListItem button>
-          <ListItemText
-            primary={<FormattedMessage {...messages.logout} />}
-            onClick={handleLogout}
-          />
-        </ListItem>
-      </List>
+      {/* <Divider /> */}
+      {/* <List> */}
+      {/*  <ListItem button> */}
+      {/*    <ListItemText */}
+      {/*      primary={<FormattedMessage {...messages.logout} />} */}
+      {/*      onClick={handleLogout} */}
+      {/*    /> */}
+      {/*  </ListItem> */}
+      {/* </List> */}
     </div>
   );
 
