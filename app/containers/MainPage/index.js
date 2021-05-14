@@ -2,6 +2,8 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import GroupAddIcon from '@material-ui/icons/GroupAdd';
+import AssignmentIcon from '@material-ui/icons/Assignment';
 import Button from '@material-ui/core/Button';
 import SearchIcon from '@material-ui/icons/Search';
 import { InputBase } from '@material-ui/core';
@@ -25,7 +27,28 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
   },
   button: {
-    width: 150,
+    width: 100,
+    backgroundColor: 'black',
+    color: 'white',
+    '&:hover': {
+      backgroundColor: 'black',
+    },
+  },
+  registration: {
+    display: 'flex',
+    marginRight: 10,
+  },
+  buttonRegistration: {
+    width: 220,
+    backgroundColor: 'black',
+    color: 'white',
+    '&:hover': {
+      backgroundColor: 'black',
+    },
+  },
+  buttonAds: {
+    marginRight: 10,
+    width: 200,
     backgroundColor: 'black',
     color: 'white',
     '&:hover': {
@@ -34,13 +57,12 @@ const useStyles = makeStyles(theme => ({
   },
   icons: {
     paddingLeft: 10,
-    height: 30,
   },
   flex: {
     flexGrow: 1,
   },
   search: {
-    // marginTop: '18%',
+    display: 'flex',
     textAlign: 'center',
     marginRight: 'auto',
     marginLeft: 'auto',
@@ -52,21 +74,27 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: 'white',
       opacity: 0.8,
     },
-    // marginLeft: 0,
-    // [theme.breakpoints.up('sm')]: {
-    //   marginLeft: theme.spacing(1),
-    //   width: 'auto',
-    // },
   },
   searchIcon: {
-    padding: theme.spacing(0, 2),
-    paddingRight: 0,
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    // padding: theme.spacing(0, 2),
+    // paddingRight: 10,
+    // height: '100%',
+    // position: 'absolute',
+    // pointerEvents: 'none',
+    // display: 'flex',
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    // textAlign: 'center',
+    // marginRight: 'auto',
+    // marginLeft: 'auto',
+    // position: 'relative',
+    // width: 10,
+    // borderRadius: theme.shape.borderRadius,
+    // backgroundColor: 'white',
+    // '&:hover': {
+    //   backgroundColor: 'white',
+    //   opacity: 0.8,
+    // },
   },
   inputRoot: {
     color: 'inherit',
@@ -85,6 +113,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   paper: {
+    display: 'flex',
     marginTop: '18%',
     textAlign: 'center',
     marginRight: 'auto',
@@ -111,15 +140,37 @@ export function MainPage() {
   const handleLogin = () => {
     history.push(routes.SIGN_IN);
   };
+  const [newComment, setNewComment] = React.useState('');
+  const handleSearch = event => {
+    setNewComment(event.target.value);
+  };
   return (
     <div className={classes.root}>
       <div className={classes.appBar}>
         <div className={classes.flex} />
-        <div position="fixed">
+        <div position="fixed" className={classes.registration}>
+          <div>
+            <Button
+              className={classes.buttonAds}
+              onClick={() => history.push(routes.ADS)}
+            >
+              Все объявления
+              <AssignmentIcon fontSize="large" className={classes.icons} />
+            </Button>
+          </div>
+          <div className={classes.registration}>
+            <Button
+              className={classes.buttonRegistration}
+              onClick={handleLogin}
+            >
+              Зарегестрироваться
+              <GroupAddIcon fontSize="large" className={classes.icons} />
+            </Button>
+          </div>
           <div>
             <Button className={classes.button} onClick={handleLogin}>
-              <p>Войти</p>
-              <AccountCircleIcon className={classes.icons} />
+              Войти
+              <AccountCircleIcon fontSize="large" className={classes.icons} />
             </Button>
           </div>
         </div>
@@ -128,9 +179,12 @@ export function MainPage() {
       <div className={classes.paper}>
         <div className={classes.search}>
           <div className={classes.searchIcon}>
-            <SearchIcon />
+            <Button onClick={() => history.push(`/ads/${newComment}`)}>
+              <SearchIcon />
+            </Button>
           </div>
           <InputBase
+            onChange={handleSearch}
             placeholder="Search…"
             classes={{
               root: classes.inputRoot,

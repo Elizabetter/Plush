@@ -8,6 +8,10 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.containers.LeftMenu';
 
 export default defineMessages({
+  main: {
+    id: `${scope}.main`,
+    defaultMessage: 'Вернуться на главную',
+  },
   agreements: {
     id: `${scope}.agreements`,
     defaultMessage: 'Все объявления',

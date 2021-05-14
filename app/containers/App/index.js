@@ -54,7 +54,7 @@ export default function App() {
     <div>
       <Switch>
         <Route exact path={routes.HOME}>
-          <Redirect to={routes.SIGN_IN} />
+          <Redirect to={routes.MAIN} />
         </Route>
         <Route path={routes.HOME_PAGE} component={HomePage} />
         <Route path={routes.SIGN_IN} component={SignIn} />

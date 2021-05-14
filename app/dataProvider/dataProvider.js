@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { stringify } from 'query-string';
+import { isEmpty } from 'lodash';
 import { fetchJson, flattenObject } from './fetch';
 import { formatResponseToEntity, formatResponseToList } from './routineUtils';
 
@@ -21,17 +22,48 @@ import { formatResponseToEntity, formatResponseToList } from './routineUtils';
  *
  */
 export default (apiUrl, httpClient = fetchJson) => ({
+  // getList: (resource, params) => {
+  //   // const { page, perPage} = params.pagination;
+  //   // const { field, order } = params.sort;
+  //   const query = {
+  //     // ...flattenObject(params.filter),
+  //     // _sort: field,
+  //     // _order: order,
+  //     // _start: (page - 1) * perPage,
+  //     // _end: page * perPage,
+  //   };
+  //   const url = `${apiUrl}/${resource}?${stringify(query)}`;
+  //   // eslint-disable-next-line arrow-body-style
+  //   return httpClient(url).then(({ headers, json }) => {
+  //     // if (!headers.has('x-total-count')) {
+  //     //   throw new Error(
+  //     //     'The X-Total-Count header is missing in the HTTP Response. The jsonServer Data Provider expects responses for lists of resources to contain this header with the total number of results to build the pagination. If you are using CORS, did you declare X-Total-Count in the Access-Control-Expose-Headers header?',
+  //     //   );
+  //     // }
+  //     return formatResponseToList(json);
+  //   });
+  // },
   getList: (resource, params) => {
-    // const { page, perPage} = params.pagination;
-    // const { field, order } = params.sort;
-    const query = {
-      // ...flattenObject(params.filter),
-      // _sort: field,
-      // _order: order,
-      // _start: (page - 1) * perPage,
-      // _end: page * perPage,
-    };
-    const url = `${apiUrl}/${resource}?${stringify(query)}`;
+    let query = {};
+    console.log(params);
+    if (params?.params) {
+      const { limit, page, ...otherParams } = params?.params;
+
+      query = flattenObject({ ...otherParams });
+      console.log(query);
+      if (page && page !== 'undefined') {
+        // @TODO remove -1 when API pagination will be changed
+        query.page = page - 1;
+      }
+      if (limit && limit !== 'undefined') {
+        query.size = limit;
+      }
+    }
+
+    let url = `${apiUrl}/${resource}`;
+    if (!isEmpty(query)) {
+      url += `?${stringify(query, { skipNull: true })}`;
+    }
     // eslint-disable-next-line arrow-body-style
     return httpClient(url).then(({ headers, json }) => {
       // if (!headers.has('x-total-count')) {

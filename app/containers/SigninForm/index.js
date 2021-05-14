@@ -5,9 +5,9 @@ import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
+import Button from '@material-ui/core/Button';
 import TextFormField from '../../components/FormFields/TextFormField';
 import { SaveButton } from '../../components/Buttons';
-
 import FormActions from '../../components/FormActions';
 import ResetPassword from '../ResetPssword';
 const formFields = {
@@ -66,8 +66,9 @@ const SignInForm = ({ onSubmit }) => {
       <Grid container>
         <Grid item xs />
         <Grid item>
-          <ResetPassword> {'Забыли пароль?'}</ResetPassword>
-
+          <ResetPassword>
+            <Button>Забыли пароль?</Button>
+          </ResetPassword>
           <Link href="/registration" variant="body2">
             {'Нет аккаунта? Зарегистрироваться.'}
           </Link>

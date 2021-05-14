@@ -9,13 +9,31 @@ import { useInjectReducer } from '../../utils/injectReducer';
 import reducer, { key } from './reducer';
 import AdCard from '../../components/AdCard';
 
-export function Ads() {
+export function Ads(props) {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
   const dispatch = useDispatch();
+  const topic = props?.match.params.topic;
+
+  const getAllAds = params => {
+    dispatch(
+      getAdsAction({
+        params,
+      }),
+    );
+  };
+
   useEffect(() => {
-    dispatch(getAdsAction());
+    if (topic === ':topic') {
+      getAllAds();
+    }
   }, []);
+
+  useEffect(() => {
+    if (topic !== ':topic') {
+      getAllAds({ topic });
+    }
+  }, [topic]);
 
   const ads = useSelector(selectAds()).content;
   const adsCards = ads ? (

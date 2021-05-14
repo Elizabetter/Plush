@@ -15,7 +15,7 @@ import { routes } from '../../constants/routes';
 import { useAuthDataContext } from '../../auth/AuthDataProvider';
 import { roleTypes } from '../../constants/api';
 
-const drawerWidth = 200;
+const drawerWidth = 205;
 
 const useStyles = makeStyles(theme => ({
   drawer: {
@@ -54,6 +54,11 @@ const LeftMenu = ({ window, handleDrawerToggle, mobileOpen }) => {
   }
   const defaultLinks = (
     <>
+      <Link to={routes.MAIN} className={classes.link}>
+        <ListItem button selected={isSelected(routes.MAIN)}>
+          <ListItemText primary={<FormattedMessage {...messages.main} />} />
+        </ListItem>
+      </Link>
       {user && role === roleTypes.ADMIN && (
         <Link to={routes.USERS} className={classes.link}>
           <ListItem button selected={isSelected(routes.USERS)}>
