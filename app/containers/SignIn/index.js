@@ -52,7 +52,7 @@ export function SignIn() {
           token: r.body.split(' ')[2],
         });
         setTimeout(function() {
-          history.push(`/ads`);
+          history.push('ads/:topic');
         }, 500);
       })
       // eslint-disable-next-line no-unused-vars

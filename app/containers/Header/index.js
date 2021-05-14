@@ -79,7 +79,7 @@ const Header = ({ handleToggle }) => {
 
   const handleLogout = () => {
     onLogout();
-    history.push(routes.SIGN_IN);
+    history.push(routes.HOME);
   };
 
   const handleLogin = () => {

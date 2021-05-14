@@ -27,7 +27,7 @@ export function UsersAds() {
   // eslint-disable-next-line no-unused-vars
   const ads = useSelector(selectContracts()).content;
   const adsCards = ads ? (
-    ads.map(ad => <AdCard ad={ad} />)
+    ads.map(ad => <AdCard ad={ad} isUser />)
   ) : (
     <p>Нет ни одного объявления</p>
   );

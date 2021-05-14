@@ -161,7 +161,7 @@ export function MainPage() {
           <div className={classes.registration}>
             <Button
               className={classes.buttonRegistration}
-              onClick={handleLogin}
+              onClick={() => history.push(routes.REGISTRATION)}
             >
               Зарегестрироваться
               <GroupAddIcon fontSize="large" className={classes.icons} />

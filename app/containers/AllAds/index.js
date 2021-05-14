@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
 import PageTemplate from '../PageTemplate';
 import { getAdsAction } from './actions';
 import { selectAds } from './selectors';
@@ -9,7 +10,24 @@ import { useInjectReducer } from '../../utils/injectReducer';
 import reducer, { key } from './reducer';
 import AdCard from '../../components/AdCard';
 
+const useStyles = makeStyles(() => ({
+  // paperBox: {
+  //   marginRight: 30,
+  //   display: 'flex',
+  // },
+  button: {
+    marginLeft: 50,
+    color: '#483D8B',
+    backgroundColor: 'white',
+    border: '2px solid',
+    height: 30,
+    textDecoration: 'none',
+    minWidth: 84,
+  },
+}));
+
 export function Ads(props) {
+  const classes = useStyles();
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
   const dispatch = useDispatch();
@@ -41,5 +59,9 @@ export function Ads(props) {
   ) : (
     <p>Нет ни одного объявления</p>
   );
-  return <PageTemplate header="Все объявления">{adsCards}</PageTemplate>;
+  return (
+    <PageTemplate header="Все объявления">
+      <div className={classes.paperBox}>{adsCards}</div>
+    </PageTemplate>
+  );
 }

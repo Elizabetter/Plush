@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
 import { useAuthDataContext } from '../../auth/AuthDataProvider';
 import { roleTypes } from '../../constants/api';
 import { ADS } from '../../constants/endpoints';
@@ -13,39 +14,45 @@ import { deleteEntityAction } from '../../containers/App/actions';
 
 const useStyles = makeStyles(() => ({
   root: {
+    minWidth: 600,
+    minHeight: 200,
     padding: 20,
     marginBottom: 20,
     justifyContent: 'space-between',
-    backgroundColor: '#3f51b5',
+    backgroundColor: '#F0F8FF',
   },
   title: {
     marginTop: -20,
-    color: 'white',
+    color: 'black',
     display: 'flex',
   },
   content: {
-    color: 'white',
+    color: 'black',
     marginTop: -10,
     margin: 10,
     width: '50%',
   },
+  contentDate: {
+    color: 'black',
+    margin: 10,
+  },
   delete: {
-    marginTop: 20,
-    color: 'white',
+    marginTop: 17,
+    color: 'black',
     height: 30,
-    marginLeft: 15,
+    // marginLeft: 8,
   },
   icon: {
     marginTop: -4,
     marginLeft: -10,
-    color: 'white',
+    color: 'black',
   },
   block: {
     display: 'flex',
   },
 }));
 
-function AdCard({ ad }) {
+function AdCard({ ad, isUser }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { user } = useAuthDataContext();
@@ -61,20 +68,23 @@ function AdCard({ ad }) {
       <Card className={classes.root}>
         <div className={classes.title}>
           <h2>{ad.topic}</h2>
-          {role === roleTypes.ADMIN && (
+          {(role === roleTypes.ADMIN || isUser) && (
             <Button
               className={classes.delete}
-              onClick={() =>
+              onClick={() => {
                 dispatch(
                   deleteEntityAction({
                     endpoint: ADS,
                     sagaRoutine: deleteEmployeesAction,
                     id: ad.id,
                   }),
-                )
-              }
+                );
+                setTimeout(function() {
+                  window.location = window.location.href;
+                }, 800);
+              }}
             >
-              Удалить объявление
+              <DeleteIcon fontSize="small" />
             </Button>
           )}
         </div>
@@ -90,6 +100,9 @@ function AdCard({ ad }) {
             <b>Цена:</b> {ad.price} бел.руб.
           </div>
         </div>
+        <div className={classes.contentDate}>
+          <b>Дата создания:</b> {ad.dateOfPlacement}
+        </div>
       </Card>
     </Grid>
   );
@@ -97,6 +110,7 @@ function AdCard({ ad }) {
 
 AdCard.propTypes = {
   ad: PropTypes.object,
+  isUser: PropTypes.bool,
 };
 
 export default AdCard;

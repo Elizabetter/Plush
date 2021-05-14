@@ -4,16 +4,34 @@ import * as Yup from 'yup';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Grid from '@material-ui/core/Grid';
-import Link from '@material-ui/core/Link';
+import { makeStyles } from '@material-ui/core/styles';
+import { useHistory } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import TextFormField from '../../components/FormFields/TextFormField';
-import { SaveButton } from '../../components/Buttons';
+import { CancelButton, SaveButton } from '../../components/Buttons';
 import FormActions from '../../components/FormActions';
 import ResetPassword from '../ResetPssword';
+import { routes } from '../../constants/routes';
 const formFields = {
   password: 'password',
   login: 'login',
 };
+const useStyles = makeStyles(() => ({
+  paperBox: {
+    marginTop: 10,
+    marginLeft: 0,
+    display: 'flex',
+  },
+  button: {
+    marginLeft: 50,
+    color: '#483D8B',
+    backgroundColor: 'white',
+    border: '2px solid',
+    height: 30,
+    textDecoration: 'none',
+    minWidth: 84,
+  },
+}));
 
 const schema = Yup.object().shape({
   [formFields.password]: Yup.string()
@@ -26,7 +44,8 @@ const SignInForm = ({ onSubmit }) => {
   const { control, errors, handleSubmit } = useForm({
     resolver: yupResolver(schema),
   });
-
+  const history = useHistory();
+  const classes = useStyles();
   const sendOnlyModified = formData => {
     onSubmit(formData);
   };
@@ -64,15 +83,17 @@ const SignInForm = ({ onSubmit }) => {
         </Grid>
       </form>
       <Grid container>
-        <Grid item xs />
-        <Grid item>
+        <div className={classes.paperBox}>
           <ResetPassword>
-            <Button>Забыли пароль?</Button>
+            <CancelButton>Забыли пароль?</CancelButton>
           </ResetPassword>
-          <Link href="/registration" variant="body2">
-            {'Нет аккаунта? Зарегистрироваться.'}
-          </Link>
-        </Grid>
+          <Button
+            className={classes.button}
+            onClick={() => history.push(routes.REGISTRATION)}
+          >
+            Зарегистрироваться
+          </Button>
+        </div>
       </Grid>
     </>
   );

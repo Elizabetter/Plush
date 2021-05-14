@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const LeftMenu = ({ window, handleDrawerToggle, mobileOpen }) => {
+const LeftMenu = ({ handleDrawerToggle, mobileOpen }) => {
   const classes = useStyles();
   const theme = useTheme();
   const location = useLocation();
@@ -89,6 +89,19 @@ const LeftMenu = ({ window, handleDrawerToggle, mobileOpen }) => {
           </ListItem>
         </Link>
       )}
+      {user && role === roleTypes.ADMIN && (
+        <ListItem
+          button
+          onClick={() =>
+            window.open(
+              'https://app.forestadmin.com/Plushkin/Development/Operations/data/account/index',
+              '_blank',
+            )
+          }
+        >
+          <ListItemText primary={<FormattedMessage {...messages.db} />} />
+        </ListItem>
+      )}
     </>
   );
 
@@ -104,14 +117,14 @@ const LeftMenu = ({ window, handleDrawerToggle, mobileOpen }) => {
     </div>
   );
 
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
+  // const container =
+  //   window !== undefined ? () => window().document.body : undefined;
 
   return (
     <nav className={classes.drawer} aria-label="menu">
       <Hidden smUp implementation="css">
         <Drawer
-          container={container}
+          // container={container}
           variant="temporary"
           anchor={theme.direction === 'rtl' ? 'right' : 'left'}
           open={mobileOpen}
@@ -142,7 +155,7 @@ const LeftMenu = ({ window, handleDrawerToggle, mobileOpen }) => {
 };
 
 LeftMenu.propTypes = {
-  window: PropTypes.func,
+  // window: PropTypes.func,
   handleDrawerToggle: PropTypes.func,
   mobileOpen: PropTypes.bool,
 };

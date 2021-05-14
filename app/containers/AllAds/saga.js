@@ -5,7 +5,6 @@ import { getAdsAction } from './actions';
 
 export function* getAdsSaga({ payload }) {
   const { params } = payload;
-  console.log(params);
   const listPayload = {
     endpoint: ADS,
     sagaRoutine: getAdsAction,

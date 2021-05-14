@@ -28,6 +28,10 @@ export default defineMessages({
     id: `${scope}.users`,
     defaultMessage: 'Все пользователи',
   },
+  db: {
+    id: `${scope}.db`,
+    defaultMessage: 'База данных',
+  },
   title: {
     id: `${scope}.title`,
     defaultMessage: 'Плюшкин',
