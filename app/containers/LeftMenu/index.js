@@ -13,6 +13,7 @@ import { Link, useLocation } from 'react-router-dom';
 import messages from './messages';
 import { routes } from '../../constants/routes';
 import { useAuthDataContext } from '../../auth/AuthDataProvider';
+import { roleTypes } from '../../constants/api';
 
 const drawerWidth = 200;
 
@@ -30,6 +31,7 @@ const useStyles = makeStyles(theme => ({
     overflow: 'auto',
   },
   link: {
+    display: 'flex',
     color: 'inherit',
     textDecoration: 'inherit',
   },
@@ -42,17 +44,23 @@ const LeftMenu = ({ window, handleDrawerToggle, mobileOpen }) => {
   const { pathname } = location;
   // eslint-disable-next-line no-unused-vars
   const { user } = useAuthDataContext();
-
   const isSelected = path => pathname === path;
-
+  let role;
+  if (user) {
+    // eslint-disable-next-line prefer-destructuring
+    role = user.role;
+  } else {
+    role = 'EMPTY';
+  }
   const defaultLinks = (
     <>
-      <Link to={routes.CREATE_AD} className={classes.link}>
-        <ListItem button selected={isSelected(routes.CREATE_AD)}>
-          <ListItemText primary={<FormattedMessage {...messages.create} />} />
-        </ListItem>
-      </Link>
-
+      {user && role === roleTypes.ADMIN && (
+        <Link to={routes.USERS} className={classes.link}>
+          <ListItem button selected={isSelected(routes.USERS)}>
+            <ListItemText primary={<FormattedMessage {...messages.users} />} />
+          </ListItem>
+        </Link>
+      )}
       <Link to={routes.ADS} className={classes.link}>
         <ListItem button selected={isSelected(routes.ADS)}>
           <ListItemText
@@ -60,13 +68,22 @@ const LeftMenu = ({ window, handleDrawerToggle, mobileOpen }) => {
           />
         </ListItem>
       </Link>
-      {/* {user && ( */}
-      <Link to={routes.MY_ADS} className={classes.link}>
-        <ListItem button selected={isSelected(routes.MY_ADS)}>
-          <ListItemText primary={<FormattedMessage {...messages.usersAds} />} />
-        </ListItem>
-      </Link>
-      {/* )} */}
+      {user && role !== roleTypes.ADMIN && (
+        <Link to={routes.CREATE_AD} className={classes.link}>
+          <ListItem button selected={isSelected(routes.CREATE_AD)}>
+            <ListItemText primary={<FormattedMessage {...messages.create} />} />
+          </ListItem>
+        </Link>
+      )}
+      {user && role === roleTypes.USER && (
+        <Link to={routes.MY_ADS} className={classes.link}>
+          <ListItem button selected={isSelected(routes.MY_ADS)}>
+            <ListItemText
+              primary={<FormattedMessage {...messages.usersAds} />}
+            />
+          </ListItem>
+        </Link>
+      )}
     </>
   );
 
@@ -79,15 +96,6 @@ const LeftMenu = ({ window, handleDrawerToggle, mobileOpen }) => {
       </Toolbar>
       <Divider />
       {defaultLinks}
-      {/* <Divider /> */}
-      {/* <List> */}
-      {/*  <ListItem button> */}
-      {/*    <ListItemText */}
-      {/*      primary={<FormattedMessage {...messages.logout} />} */}
-      {/*      onClick={handleLogout} */}
-      {/*    /> */}
-      {/*  </ListItem> */}
-      {/* </List> */}
     </div>
   );
 

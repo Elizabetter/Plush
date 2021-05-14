@@ -7,12 +7,12 @@ import genericMessages from '../../containers/App/messages';
 const useStyles = makeStyles(() => ({
   save: {
     color: 'white',
-    backgroundColor: '#9B59B6',
+    backgroundColor: '#483D8B',
     height: 30,
     textDecoration: 'none',
     minWidth: 84,
     '&:hover': {
-      backgroundColor: '#9B59B6',
+      backgroundColor: '#483D8B',
     },
   },
   saveDisabled: {
@@ -26,7 +26,7 @@ const useStyles = makeStyles(() => ({
     },
   },
   cancel: {
-    color: '#9B59B6',
+    color: '#483D8B',
     backgroundColor: 'white',
     border: '2px solid',
     height: 30,

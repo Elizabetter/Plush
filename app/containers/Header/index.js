@@ -13,16 +13,18 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { Typography } from '@material-ui/core';
 import { routes } from '../../constants/routes';
 import { useAuthDataContext } from '../../auth/AuthDataProvider';
+import ChangePassword from '../ChangePassword';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
-    backgroundColor: '#9B59B6 ',
+    backgroundColor: '#3f51b5',
   },
   menuButton: {
     marginRight: theme.spacing(2),
   },
   title: {
+    color: '#FFFAF0\t',
     flexGrow: 1,
   },
   image: {
@@ -84,10 +86,6 @@ const Header = ({ handleToggle }) => {
     history.push(routes.SIGN_IN);
   };
 
-  const handleProfile = () => {
-    history.push(routes.PROFILE);
-  };
-
   return (
     <React.Fragment>
       <AppBar position="fixed" className={classes.appBar}>
@@ -105,7 +103,7 @@ const Header = ({ handleToggle }) => {
           </Hidden>
           <div className={classes.title}>
             <Typography variant="h4" component="h1" gutterBottom>
-              Плюшкин
+              Plushkin
             </Typography>
           </div>
           {activeUser ? (
@@ -138,7 +136,9 @@ const Header = ({ handleToggle }) => {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleProfile}>Мой профиль</MenuItem>
+                <ChangePassword>
+                  <MenuItem>Сменить пароль</MenuItem>
+                </ChangePassword>
                 <MenuItem onClick={handleLogout}>Выйти</MenuItem>
               </Menu>
             </div>

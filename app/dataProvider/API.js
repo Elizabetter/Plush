@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-cycle
 import dataProvider from './dataProvider';
 import { fetchJson } from './fetch';
 import storage from '../utils/storage';
@@ -25,7 +26,7 @@ export function createOne(endpoint, data) {
 }
 
 export function deleteOne(endpoint, id, params) {
-  return Provider.delete(endpoint, endpoint, {
+  return Provider.delete(endpoint, {
     id,
     queryParams: params,
   });
@@ -33,6 +34,10 @@ export function deleteOne(endpoint, id, params) {
 
 export function getList(endpoint, params = {}) {
   return Provider.getList(endpoint, params);
+}
+
+export function resetPassword(endpoint, params = {}) {
+  return Provider.resetPassword(endpoint, params);
 }
 
 export function getOne(endpoint, id, params) {

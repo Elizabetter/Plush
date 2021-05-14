@@ -3,3 +3,10 @@ export const alertType = {
   SUCCESS: 'SUCCESS',
   WARNING: 'WARNING',
 };
+
+export const roleTypes = {
+  USER: 'USER',
+  MANAGER: 'MANAGER',
+  ADMIN: 'ADMIN',
+  NULL: null,
+};

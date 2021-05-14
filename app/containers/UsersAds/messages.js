@@ -7,4 +7,8 @@ export default defineMessages({
     id: `${scope}.title`,
     defaultMessage: 'Мои объявления',
   },
+  emptyPage: {
+    id: `${scope}.emptyPage`,
+    defaultMessage: 'У вас пока что нет ни одного объявления.',
+  },
 });

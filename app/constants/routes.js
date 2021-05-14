@@ -8,4 +8,6 @@ export const routes = {
   MY_ADS: '/my_ads',
   EMPTY_PAGE: '/empty',
   PROFILE: '/profile',
+  USERS: '/users',
+  MAIN: '/main',
 };

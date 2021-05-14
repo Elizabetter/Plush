@@ -32,7 +32,6 @@ export default (apiUrl, httpClient = fetchJson) => ({
       // _end: page * perPage,
     };
     const url = `${apiUrl}/${resource}?${stringify(query)}`;
-
     // eslint-disable-next-line arrow-body-style
     return httpClient(url).then(({ headers, json }) => {
       // if (!headers.has('x-total-count')) {
@@ -46,6 +45,11 @@ export default (apiUrl, httpClient = fetchJson) => ({
 
   getOne: (resource, params) =>
     httpClient(`${apiUrl}/${resource}/${params.id}`).then(({ json }) =>
+      formatResponseToEntity(json),
+    ),
+
+  resetPassword: (resource, params) =>
+    httpClient(`${apiUrl}/${resource}?email=${params.login}`).then(({ json }) =>
       formatResponseToEntity(json),
     ),
 

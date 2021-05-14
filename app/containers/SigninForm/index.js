@@ -9,6 +9,7 @@ import TextFormField from '../../components/FormFields/TextFormField';
 import { SaveButton } from '../../components/Buttons';
 
 import FormActions from '../../components/FormActions';
+import ResetPassword from '../ResetPssword';
 const formFields = {
   password: 'password',
   login: 'login',
@@ -65,6 +66,8 @@ const SignInForm = ({ onSubmit }) => {
       <Grid container>
         <Grid item xs />
         <Grid item>
+          <ResetPassword> {'Забыли пароль?'}</ResetPassword>
+
           <Link href="/registration" variant="body2">
             {'Нет аккаунта? Зарегистрироваться.'}
           </Link>

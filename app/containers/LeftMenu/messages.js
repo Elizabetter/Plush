@@ -20,6 +20,10 @@ export default defineMessages({
     id: `${scope}.usersAds`,
     defaultMessage: 'Мои объявления',
   },
+  users: {
+    id: `${scope}.users`,
+    defaultMessage: 'Все пользователи',
+  },
   title: {
     id: `${scope}.title`,
     defaultMessage: 'Плюшкин',

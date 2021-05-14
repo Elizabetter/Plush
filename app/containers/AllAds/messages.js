@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.components.MainContent';
+export const scope = 'app.components.AllAds';
 
 export default defineMessages({
   userNotFound: {

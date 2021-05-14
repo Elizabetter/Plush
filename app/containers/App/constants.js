@@ -4,6 +4,7 @@ export const CRUD_GET_LIST = 'app/CRUD/CRUD_GET_LIST';
 export const CRUD_GET_ONE = 'app/CRUD/CRUD_GET_ONE';
 export const CRUD_GET_WHOLE_LIST = 'app/CRUD/CRUD_GET_WHOLE_LIST';
 export const CRUD_UPDATE_ONE = 'app/CRUD/CRUD_UPDATE_ONE';
+export const CRUD_DELETE_LIST = 'app/CRUD/CRUD_DELETE_LIST';
 
 export const LOGIN = 'app/App/LOGIN';
 export const LOGOUT = 'app/App/LOGOUT';

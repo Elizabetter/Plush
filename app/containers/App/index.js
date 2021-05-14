@@ -22,9 +22,11 @@ import { useAuthDataContext } from '../../auth/AuthDataProvider';
 import EmptyPage from '../EmptyPage';
 import { SignIn } from '../SignIn';
 import { Registration } from '../Registration';
-import { Ads } from '../MainContent';
+import { Ads } from '../AllAds';
 import { CreateAd } from '../CreateAd';
 import { UsersAds } from '../UsersAds';
+import { Users } from '../Users';
+import { MainPage } from '../MainPage';
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -58,6 +60,8 @@ export default function App() {
         <Route path={routes.SIGN_IN} component={SignIn} />
         <Route path={routes.REGISTRATION} component={Registration} />
         <Route path={routes.ADS} component={Ads} />
+        <Route path={routes.USERS} component={Users} />
+        <Route path={routes.MAIN} component={MainPage} />
         <Route path={routes.MY_ADS} component={UsersAds} />
         <Route path={routes.CREATE_AD} component={CreateAd} />
         <Route path={routes.EMPTY_PAGE} component={EmptyPage} />

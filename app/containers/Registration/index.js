@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     margin: theme.spacing(3),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: '#483D8B',
   },
   form: {
     width: 400,
@@ -70,7 +70,12 @@ export function Registration() {
           status={alertType.ERROR}
         />
       )}
-      {showSuccessAlert && <CustomizedSnackbars status={alertType.SUCCESS} />}
+      {showSuccessAlert && (
+        <CustomizedSnackbars
+          message={<FormattedMessage {...messages.successAlert} />}
+          status={alertType.SUCCESS}
+        />
+      )}
       <Avatar className={classes.avatar}>
         <LockOutlinedIcon />
       </Avatar>

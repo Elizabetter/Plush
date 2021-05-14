@@ -6,3 +6,4 @@ export const REGISTRATION = `users/registration`;
 export const SIGN_IN = `users/login`;
 export const CREATE_AD = userId => `users/${userId}/ads`;
 export const ADS = `ads`;
+export const CHANGE_PASSWORD = `user/savePassword`;
