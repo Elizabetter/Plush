@@ -7,26 +7,26 @@ import {
   TableRow,
   Paper,
   TableBody,
-  Tooltip,
-  IconButton,
+  // Tooltip,
+  // IconButton,
   TableCell,
-  Box,
+  // Box,
 } from '@material-ui/core';
 import { FormattedMessage } from 'react-intl';
-import DeleteIcon from '@material-ui/icons/Delete';
+// import DeleteIcon from '@material-ui/icons/Delete';
 import messages from '../Users/messages';
 import { TableTitle } from '../TableTitle';
-import { EnhancedTableToolbarDelete } from '../Users/EnhancedTableToolbar';
+// import { EnhancedTableToolbarDelete } from '../Users/EnhancedTableToolbar';
 import CheckboxField from '../../components/FormFields/CheckboxField';
 // eslint-disable-next-line import/no-cycle
 import { useStyles } from '../Users/index';
-import Notification from '../Notification';
+// import Notification from '../Notification';
 
 const EmployeesTable = ({
   employees,
-  selected,
-  handleDelete,
-  deleteEmployees,
+  // selected,
+  // handleDelete,
+  // deleteEmployees,
   handleClick,
   isSelected,
 }) => {
@@ -39,16 +39,16 @@ const EmployeesTable = ({
           <TableHead className={classes.head}>
             <TableRow>
               <TableTitle>
-                {selected.length > 0 ? (
-                  <Notification
-                    deleteFunction={deleteEmployees}
-                    selected={selected.length}
-                  >
-                    <EnhancedTableToolbarDelete numSelected={selected.length} />
-                  </Notification>
-                ) : (
-                  <div />
-                )}
+                {/* {selected.length > 0 ? ( */}
+                {/*  <Notification */}
+                {/*    deleteFunction={deleteEmployees} */}
+                {/*    selected={selected.length} */}
+                {/*  > */}
+                {/*    <EnhancedTableToolbarDelete numSelected={selected.length} /> */}
+                {/*  </Notification> */}
+                {/* ) : ( */}
+                <div />
+                {/* )} */}
               </TableTitle>
               <TableTitle>
                 <FormattedMessage {...messages.employee} />
@@ -62,9 +62,9 @@ const EmployeesTable = ({
               <TableTitle>
                 <FormattedMessage {...messages.role} />
               </TableTitle>
-              <TableTitle>
-                <FormattedMessage {...messages.actions} />
-              </TableTitle>
+              {/* <TableTitle> */}
+              {/*  <FormattedMessage {...messages.actions} /> */}
+              {/* </TableTitle> */}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -87,28 +87,28 @@ const EmployeesTable = ({
                   <TableCell>{login}</TableCell>
                   <TableCell>{email}</TableCell>
                   <TableCell>{role}</TableCell>
-                  <TableCell>
-                    <Box className={classes.icons}>
-                      <Notification
-                        deleteFunction={handleDelete}
-                        userId={id}
-                        name={fullName}
-                      >
-                        <div className={classes.iconDelete}>
-                          <Tooltip
-                            className={classes.icon}
-                            title={
-                              <FormattedMessage {...messages.deleteTitle} />
-                            }
-                          >
-                            <IconButton aria-label="delete">
-                              <DeleteIcon fontSize="small" />
-                            </IconButton>
-                          </Tooltip>
-                        </div>
-                      </Notification>
-                    </Box>
-                  </TableCell>
+                  {/* <TableCell> */}
+                  {/*  <Box className={classes.icons}> */}
+                  {/*    <Notification */}
+                  {/*      deleteFunction={handleDelete} */}
+                  {/*      userId={id} */}
+                  {/*      name={fullName} */}
+                  {/*    > */}
+                  {/*      <div className={classes.iconDelete}> */}
+                  {/*        <Tooltip */}
+                  {/*          className={classes.icon} */}
+                  {/*          title={ */}
+                  {/*            <FormattedMessage {...messages.deleteTitle} /> */}
+                  {/*          } */}
+                  {/*        > */}
+                  {/*          <IconButton aria-label="delete"> */}
+                  {/*            <DeleteIcon fontSize="small" /> */}
+                  {/*          </IconButton> */}
+                  {/*        </Tooltip> */}
+                  {/*      </div> */}
+                  {/*    </Notification> */}
+                  {/*  </Box> */}
+                  {/* </TableCell> */}
                 </TableRow>
               );
             })}

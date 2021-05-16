@@ -11,10 +11,6 @@ import reducer, { key } from './reducer';
 import AdCard from '../../components/AdCard';
 
 const useStyles = makeStyles(() => ({
-  // paperBox: {
-  //   marginRight: 30,
-  //   display: 'flex',
-  // },
   button: {
     marginLeft: 50,
     color: '#483D8B',
