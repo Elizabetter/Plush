@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 import { Controller, useForm } from 'react-hook-form';
@@ -11,6 +11,7 @@ import { routes } from '../../constants/routes';
 import { Progress } from '../Progress';
 import TextFormField from '../../components/FormFields/TextFormField';
 import NumberFormField from '../../components/FormFields/NumberFormField';
+import ImageUpload from '../ImageUpload';
 
 const formFields = {
   topic: 'topic',
@@ -43,9 +44,28 @@ const CreateAdForm = ({ onSubmit, isSendingUserData }) => {
     resolver: yupResolver(schema),
   });
   const history = useHistory();
+  const [array, setArray] = useState(null);
+  const sendOnlyModified = formData => {
+    const { topic, content, city, phoneNumber, price } = formData;
+    const photo = array && array[0];
+    const finalPhoto = photo ? String(photo) : null;
+    // const final = [];
+    // final.push(photo, title, description, category, price);
+    // const formDataFile = new FormData();
+    // formDataFile.append('file', { final });
+    const data = {
+      topic,
+      content,
+      city,
+      phoneNumber,
+      price,
+      photo: finalPhoto,
+    };
+    onSubmit(data);
+  };
 
   return (
-    <form noValidate onSubmit={handleSubmit(onSubmit)}>
+    <form noValidate onSubmit={handleSubmit(sendOnlyModified)}>
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Controller
@@ -94,6 +114,7 @@ const CreateAdForm = ({ onSubmit, isSendingUserData }) => {
           />
         </Grid>
       </Grid>
+      <ImageUpload cardName="Input Image" setArray={setArray} />
       <FormActionsDisplay>
         <CancelButton onClick={() => history.push(routes.ADS)} />
         <Progress loading={isSendingUserData}>
