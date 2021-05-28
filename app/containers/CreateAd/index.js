@@ -17,7 +17,7 @@ export function CreateAd() {
   const onCreateStatementFormSubmit = ({ ...data }) => {
     if (Object.keys(data).length > 0) {
       setSendingUserData(true);
-      const { topic, content, city, phoneNumber, price } = data;
+      const { topic, content, city, phoneNumber, price, photo } = data;
       const payload = {
         endpoint: CREATE_AD(user?.id),
         sagaRoutine: createAdAction,
@@ -27,6 +27,7 @@ export function CreateAd() {
           city,
           phoneNumber,
           price,
+          photo,
         },
         callback: () => {
           history.push(routes.MY_ADS);

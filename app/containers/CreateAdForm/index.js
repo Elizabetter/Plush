@@ -47,19 +47,22 @@ const CreateAdForm = ({ onSubmit, isSendingUserData }) => {
   const [array, setArray] = useState(null);
   const sendOnlyModified = formData => {
     const { topic, content, city, phoneNumber, price } = formData;
-    const photo = array && array[0];
-    const finalPhoto = photo ? String(photo) : null;
+    // const photo = array && array[0];
+    // const finalPhoto = photo ? String(photo) : null;
+    // console.log(array, photo, finalPhoto);
     // const final = [];
     // final.push(photo, title, description, category, price);
     // const formDataFile = new FormData();
     // formDataFile.append('file', { final });
+    const photo = array ? array[0] : '';
+    console.log(photo);
     const data = {
       topic,
       content,
       city,
       phoneNumber,
       price,
-      photo: finalPhoto,
+      photo,
     };
     onSubmit(data);
   };
